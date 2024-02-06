@@ -15,9 +15,10 @@
       in
       {
         devShells = rec {
-          vscodium-openmp = pkgs.mkShell.override { stdenv = pkgs.clangStdenv; } {
-            buildInputs = with pkgs; [
+          vscodium-openmp = pkgs.mkShell.override { stdenv = pkgs.llvmPackages_latest.stdenv; } {
+            nativeBuildInputs = with pkgs; [
               llvmPackages.openmp
+              clang-tools
               vscodium
             ];
           };
