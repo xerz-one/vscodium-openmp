@@ -7,11 +7,11 @@
   };
 
   outputs =
-    inputs@{ ... }:
-    inputs.flake-utils.lib.eachDefaultSystem (
+    inputs@{ nixpkgs, ... }:
+    inputs.flake-utils.lib.eachSystem nixpkgs.lib.systems.flakeExposed (
       system:
       let
-        pkgs = import inputs.nixpkgs { inherit system; };
+        pkgs = import nixpkgs { inherit system; };
       in
       {
         devShells = rec {
