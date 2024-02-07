@@ -19,7 +19,13 @@
             nativeBuildInputs = with pkgs; [
               llvmPackages.openmp
               clang-tools
-              vscodium
+              (vscode-with-extensions.override {
+                vscode = vscodium;
+                vscodeExtensions = with vscode-extensions; [
+                  llvm-vs-code-extensions.vscode-clangd
+                  ms-vscode.makefile-tools
+                ];
+              })
             ];
           };
           default = vscodium-openmp;
